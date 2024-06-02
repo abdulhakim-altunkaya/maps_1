@@ -1,0 +1,40 @@
+html {
+    font-family: system-ui, sans-serif;
+    font-size: 1.25rem;
+  }
+  
+  body {
+    margin: 0;
+    background-color: lightgreen;
+  }
+  
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .App {
+    width: 80%;
+    margin: auto;
+  }
+
+  path {
+    fill: #2a354d;
+  }
+  path:hover {
+    fill: red;
+    cursor: pointer;
+  }
+  path:active {
+    fill: #555e73;
+  }
+
+  text {
+    pointer-events: none;
+}
+  
+  .App {
+    font-family: sans-serif;
+    text-align: center;
+  }
+  
