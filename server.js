@@ -11,14 +11,13 @@ app.get("/serversendhello", (req, res) => {
 })
 
 
-app.get("/servercreatetable", async (req, res) => {
+app.get("/servercreatetable1", async (req, res) => {
   const client = await pool.connect();
   try {
     const result = await client.query(`
       CREATE TABLE IF NOT EXISTS population (
-        id SERIAL PRIMARY KEY,
-        "idProvince" INTEGER,
         "province" TEXT,
+        "id" TEXT,
         "2000" INTEGER,
         "2001" INTEGER, 
         "2002" INTEGER,
