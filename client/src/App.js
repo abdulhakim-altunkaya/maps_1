@@ -4,14 +4,16 @@ import Main from "./components/main/Main";
 import ProvinceDetail from "./components/main/ProvinceDetail";
 import DistrictDetail from "./components/main/DistrictDetail";
 
+const charEncoding = 'utf-8';
+
 function App() {
   return (
     <div className="App">
       <Router>
         < MapComponent />
         <Routes>
-          <Route path="/province/:provinceName" element={<ProvinceDetail/>} />
-          <Route path="/district/:districtName" element={<DistrictDetail/>} />
+          <Route path="/province/:provinceId" element={<ProvinceDetail/>} />
+          <Route path="/district/:districtId" element={<DistrictDetail/>} />
           <Route path="/" element={<Main/>} />
         </Routes>
       </Router>

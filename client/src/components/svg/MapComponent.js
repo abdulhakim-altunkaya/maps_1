@@ -1,17 +1,29 @@
 import React, {useState} from 'react';
 import { ReactComponent as MapSvg } from './map.svg'; // Assuming your SVG file is named map.svg and is in the same folder
+import { useNavigate } from "react-router-dom";
 import '../../styles/MapComponent.css'; // Import CSS file for styling
+import provinceMap from './provinceMap';
 
 function MapComponent() {
+  const navigate = useNavigate();
+
   let [stateName, setStateName] = useState("");
+  let [stateId, setStateId] = useState("");
+  
 
   const handleRegionClick = (event) => {
-    // Handle click event on regions of the map
-    console.log('Clicked on region:', event.target.id);
+    const provinceIdNum = event.target.id;
+    const provinceName = provinceMap[provinceIdNum];
+    console.log(provinceName);
+    navigate(`/province/${provinceIdNum}`);
   };
-  const handleRegionHover = (e) => {
-    setStateName(e.target.id)
+  const handleRegionHover = (event) => {
+    const provinceIdNum = event.target.id;
+    const provinceName = provinceMap[provinceIdNum];
+    setStateName(provinceName);
+    setStateId(provinceIdNum);
   }
+
 
   return (
     <div>
@@ -19,7 +31,7 @@ function MapComponent() {
       <div className="map-container">
         <MapSvg onMouseOver={handleRegionHover} onClick={handleRegionClick} />
       </div>
-      <p>&nbsp;{stateName}</p>
+      <p>{stateId}&nbsp;&nbsp;&nbsp;{stateName}</p>
     </div>
   );
 }

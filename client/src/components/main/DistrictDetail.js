@@ -2,10 +2,10 @@ import React from 'react';
 import { useParams } from "react-router-dom";
 
 function DistrictDetail() {
-  const {districtName} = useParams();
+  const {districtId} = useParams();
 
   return (
-    <div>{districtName}</div>
+    <div>{districtId}</div>
   )
 }
 
