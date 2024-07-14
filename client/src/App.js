@@ -1,10 +1,8 @@
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import MapComponent from "./components/svg/MapComponent";
-import Main from "./components/main/Main";
+import Homepage from "./components/main/Homepage";
 import ProvinceDetail from "./components/main/ProvinceDetail";
 import DistrictDetail from "./components/main/DistrictDetail";
-
-const charEncoding = 'utf-8';
 
 function App() {
   return (
@@ -14,7 +12,7 @@ function App() {
         <Routes>
           <Route path="/province/:provinceId" element={<ProvinceDetail/>} />
           <Route path="/district/:districtId" element={<DistrictDetail/>} />
-          <Route path="/" element={<Main/>} />
+          <Route path="/" element={<Homepage/>} />
         </Routes>
       </Router>
     </div>
