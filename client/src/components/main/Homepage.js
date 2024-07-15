@@ -24,7 +24,7 @@ function Homepage() {
 
   return (
     <div>
-      <h1>City Populations for 2023 and 2022</h1>
+      <h1>NÜFUS TABLOSU</h1>
       {Array.isArray(message) ? (
         <table className="styled-table">
           <thead>
