@@ -36,7 +36,7 @@ app.get("/serversendprovincedetails/:idpro", async (req, res) => {
   try {
     const client = await pool.connect();
     const result = await client.query(
-      `SELECT * FROM provinces WHERE provinceid = $1`, [ idpro ]
+      `SELECT * FROM provinces WHERE provinceid = $1`, [idpro]
     );
     const provinceDetails = await result.rows[0];
     client.release();

@@ -1,0 +1,49 @@
+.provincetable {
+  width: 25%;
+  margin: 25px auto;
+  border-collapse: collapse;
+  font-size: 16px;
+  text-align: left;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.provincetable thead tr {
+  background-color: #4a90e2; /* Blue color for the header */
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.provincetable th,
+.provincetable td {
+  padding: 10px 15px;
+}
+
+.provincetable tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.provincetable tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3; /* Light grey for even rows */
+}
+
+.provincetable tbody tr:last-of-type {
+  border-bottom: 2px solid #4a90e2; /* Blue color for the last row border */
+}
+
+.provincetable tbody tr:hover {
+  background-color: #e1e1e1; /* Light grey for hover effect */
+}
+
+@media (max-width: 600px) {
+  .provincetable {
+    width: 90%; /* Full width on mobile devices */
+  }
+
+  .provincetable th,
+  .provincetable td {
+    padding: 8px 10px;
+  }
+}

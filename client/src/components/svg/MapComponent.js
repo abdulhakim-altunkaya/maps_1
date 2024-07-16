@@ -14,7 +14,6 @@ function MapComponent() {
   const handleRegionClick = (event) => {
     const provinceIdNum = event.target.id;
     const provinceName = provinceMap[provinceIdNum];
-    console.log(provinceName);
     navigate(`/province/${provinceIdNum}`);
   };
   const handleRegionHover = (event) => {
