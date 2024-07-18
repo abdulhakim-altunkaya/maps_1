@@ -1,0 +1,50 @@
+.provinceDistrictTable {
+    width: 25%;
+    margin: 25px auto;
+    border-collapse: collapse;
+    font-size: 16px;
+    text-align: left;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .provinceDistrictTable thead tr {
+    background-color: #98f69d;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+  }
+  
+  .provinceDistrictTable th,
+  .provinceDistrictTable td {
+    padding: 10px 15px;
+  }
+  
+  .provinceDistrictTable tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .provinceDistrictTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3; /* Light grey for even rows */
+  }
+  
+  .provinceDistrictTable tbody tr:last-of-type {
+    border-bottom: 2px solid #4a90e2; /* Blue color for the last row border */
+  }
+  
+  .provinceDistrictTable tbody tr:hover {
+    background-color: #e1e1e1; /* Light grey for hover effect */
+  }
+  
+  @media (max-width: 600px) {
+    .provinceDistrictTable {
+      width: 90%; /* Full width on mobile devices */
+    }
+  
+    .provinceDistrictTable th,
+    .provinceDistrictTable td {
+      padding: 8px 10px;
+    }
+  }
+  
