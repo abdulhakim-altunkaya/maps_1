@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import ProvinceDetailDown from "./ProvinceDetailDown";
 import '../../styles/ProvinceTable.css';
 
 function ProvinceDetail() {
@@ -13,7 +14,6 @@ function ProvinceDetail() {
       try {
         const response = await axios.get(`http://localhost:5000/serversendprovincedetails/${provinceId}`);
         setMessage(response.data);
-        console.log(response.data[2023])
       } catch (error) {
         console.log(error.message);
         setMessage("error happened");
@@ -28,7 +28,9 @@ function ProvinceDetail() {
 
   return (
     <div>
-      <h2>{message.provincename}</h2>
+      <ProvinceDetailDown />
+      <p></p>
+      <h2>Yıllara Göre {message.provincename} Nüfusu</h2>
       <table className="provincetable">
         <thead>
           <tr>
@@ -56,7 +58,7 @@ function ProvinceDetail() {
           <tr><td>2007</td><td>{formatNumber(message[2007])}</td></tr>
         </tbody>
       </table>
-
+      
     </div>
   )
 }

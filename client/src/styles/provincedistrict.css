@@ -10,7 +10,7 @@
   }
   
   .provinceDistrictTable thead tr {
-    background-color: #98f69d;
+    background-color: #10b818;
     color: #ffffff;
     text-align: left;
     font-weight: bold;
@@ -26,7 +26,11 @@
   }
   
   .provinceDistrictTable tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3; /* Light grey for even rows */
+    background-color: #ffffff; /* Light grey for even rows */
+  }
+
+  .provinceDistrictTable tbody tr:nth-of-type(odd) {
+    background-color: #eff9a8; /* Light grey for odd rows */
   }
   
   .provinceDistrictTable tbody tr:last-of-type {
@@ -34,7 +38,7 @@
   }
   
   .provinceDistrictTable tbody tr:hover {
-    background-color: #e1e1e1; /* Light grey for hover effect */
+    background-color: #c4c4c4; /* Light grey for hover effect */
   }
   
   @media (max-width: 600px) {

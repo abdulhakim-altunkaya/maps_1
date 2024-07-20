@@ -55,7 +55,7 @@ function Homepage() {
           </tbody>
         </table>
       ) : (
-        <p>{message}</p>
+        <p>Error, please write to website administrator: drysoftware1@gmail.com</p>
       )}
     </div>
   );

@@ -50,6 +50,29 @@ app.get("/serversendprovincedetails/:idpro", async (req, res) => {
   }
 });
 
+app.get("/serversendprovincedistrictdetails/:idpro", async (req, res) => {
+  const { idpro } = req.params;
+  if (!idpro) {
+    return res.status(400).json({ message: "Province ID is required" });
+  }
+
+  try {
+    const client = await pool.connect();
+    const result = await client.query(
+      `SELECT * FROM test WHERE provinceid = $1`, [idpro]
+    );
+    const provinceDetails = result.rows;
+    client.release();
+    if (provinceDetails.length === 0) {
+      return res.status(404).json({ message: "No data found for the provided province ID" });
+    }
+    res.json(provinceDetails);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ message: "Error occurred at the backend: Could not fetch province district details" });
+  }
+});
+
 
 const PORT = process.env.port || 5000;
 app.listen(PORT, () => {
