@@ -20,10 +20,14 @@ function MapComponent() {
     setStateName(provinceName);;
   }
 
+  const goHomepage = () => {
+    navigate("/")
+  }
+
 
   return (
     <div>
-      <h1 style={{ fontFamily: "Ubuntu", cursor: "pointer"}}>TÜRKİYE NÜFUS TABLOSU</h1>
+      <h1 onClick={goHomepage} style={{ fontFamily: "Ubuntu", cursor: "pointer"}}>TÜRKİYE NÜFUS TABLOSU</h1>
       <p>{stateName}&nbsp;</p>
       <div className="map-container">
         <MapSvg onMouseOver={handleRegionHover} onClick={handleRegionClick} />

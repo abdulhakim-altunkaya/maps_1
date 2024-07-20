@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/TableStyles.css';
 
 function Homepage() {
+  const navigate = useNavigate();
+
   const [message, setMessage] = useState([]);
 
   useEffect(() => {
@@ -21,6 +24,10 @@ function Homepage() {
   const formatNumber = (num) => {
     return new Intl.NumberFormat('de-DE').format(num); // German locale to use dot as thousands separator
   };
+
+  const goProvince = async (provinceIdNum) => {
+    navigate(`/province/${provinceIdNum}`);
+  }
 
   return (
     <div>
@@ -43,7 +50,9 @@ function Homepage() {
             {message.map((province, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{province.provincename}</td>
+                <td onClick={() => goProvince(province.provinceid)} style={{cursor: "pointer"}}>
+                  {province.provincename}
+                </td>
                 <td>{formatNumber(province['2023'])}</td>
                 <td>{formatNumber(province['2022'])}</td>
                 <td>{formatNumber(province['2021'])}</td>

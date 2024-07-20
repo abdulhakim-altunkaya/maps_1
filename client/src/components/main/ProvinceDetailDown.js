@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import '../../styles/ProvinceDistrict.css';
 
 function ProvinceDetailDown() {
   const { provinceId } = useParams();
-
+  const navigate = useNavigate();
   const [message, setMessage] = useState([]);
   const [provinceTitle, setProvinceTitle] = useState("");
 
@@ -31,6 +32,10 @@ function ProvinceDetailDown() {
     return num ? new Intl.NumberFormat("de-DE").format(num) : 'N/A';
   }
 
+  const getDistrictDetails = async (districtnum) => {
+    navigate(`/district/${districtnum}`);
+  }
+
   return (
         <div>
           <h2 style={{ fontFamily: "Ubuntu" }}>{provinceTitle} Nüfus Tablosu</h2>
@@ -54,7 +59,9 @@ function ProvinceDetailDown() {
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{district.provincename}</td>
-                    <td>{district.districtname}</td>
+                    <td onClick={() => getDistrictDetails(district.id)} style={{cursor: "pointer"}}>
+                      {district.districtname}
+                    </td>
                     <td>{formatNumber(district['2023'])}</td>
                     <td>{formatNumber(district['2022'])}</td>
                     <td>{formatNumber(district['2021'])}</td>
