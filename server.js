@@ -78,3 +78,8 @@ const PORT = process.env.port || 5000;
 app.listen(PORT, () => {
   console.log("Port is open on " + PORT);
 });
+
+//implement a settimeout for all components
+//create a comment section and place it under all components
+//Later, can you also create a comment database for eumaps?
+//

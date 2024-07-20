@@ -1,6 +1,8 @@
-/* Styling for the map container */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+
 .map-container {
     position: relative;
+
   }
   
   /* Styling for tooltip */

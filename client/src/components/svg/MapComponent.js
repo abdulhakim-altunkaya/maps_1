@@ -8,29 +8,27 @@ function MapComponent() {
   const navigate = useNavigate();
 
   let [stateName, setStateName] = useState("");
-  let [stateId, setStateId] = useState("");
   
 
   const handleRegionClick = (event) => {
     const provinceIdNum = event.target.id;
-    const provinceName = provinceMap[provinceIdNum];
     navigate(`/province/${provinceIdNum}`);
   };
   const handleRegionHover = (event) => {
     const provinceIdNum = event.target.id;
     const provinceName = provinceMap[provinceIdNum];
-    setStateName(provinceName);
-    setStateId(provinceIdNum);
+    setStateName(provinceName);;
   }
 
 
   return (
     <div>
-      <h1>Interactive SVG Map</h1>
+      <h1 style={{ fontFamily: "Ubuntu", cursor: "pointer"}}>TÜRKİYE NÜFUS TABLOSU</h1>
+      <p>{stateName}&nbsp;</p>
       <div className="map-container">
         <MapSvg onMouseOver={handleRegionHover} onClick={handleRegionClick} />
       </div>
-      <p>{stateId}&nbsp;&nbsp;&nbsp;{stateName}</p>
+      
     </div>
   );
 }
