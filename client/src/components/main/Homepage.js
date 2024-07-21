@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/TableStyles.css';
+import Comment from "./Comment";
 
 function Homepage() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function Homepage() {
 
   return (
     <div>
-      <h1>NÜFUS TABLOSU</h1>
+      <h1 style={{ fontFamily: "Kanit"}}>NÜFUS TABLOSU</h1>
       {Array.isArray(message) ? (
         <table className="styled-table">
           <thead>
@@ -64,8 +65,9 @@ function Homepage() {
           </tbody>
         </table>
       ) : (
-        <p>Error, please write to website administrator: drysoftware1@gmail.com</p>
+        <p>Probably you do not have internet now. Website Administrator: drysoftware1@gmail.com</p>
       )}
+      <Comment />
     </div>
   );
 }
