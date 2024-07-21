@@ -19,10 +19,12 @@ function Comment() {
         e.preventDefault();
         if (name && text) {
             const date = new Date().toLocaleDateString('en-GB');
-            const comment = {name, text, date};
-            console.log(comment);
+            const newComment = {name, text, date};
+            console.log(newComment);
             setName("");
             setText("");
+            const response = await axios.post("http://localhost:5000/serversavecomment", newComment)
+            alert(response.data.message);
         } else {
             alert("Please fill in comment fields");
         }

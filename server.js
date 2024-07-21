@@ -6,6 +6,9 @@ const { pool } = require("./db");
 const cors = require("cors");
 app.use(cors());
 
+//we need this as we use req.body to send data from frontend to backend
+app.use(express.json());
+
 app.get("/serversendhello", (req, res) => {
   res.status(200).json({myMessage: "Hello from backend"});
 })
@@ -93,6 +96,21 @@ app.get("/serversenddistrictdetails/:iddist", async (req, res) => {
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: "Error: Maybe district id is wrong or database is down"});
+  }
+});
+
+app.post("/serversavecomment", async (req, res) => {
+  const newComment = req.body;
+  const {name, text, date} = newComment;
+  try {
+    const client = await pool.connect();
+    const result = await client.query(
+      `INSERT INTO comments (date, name, comment) values ($1, $2, $3)`, [date, name, text]
+    );
+    res.status(201).json({message: "Yorum kaydedildi"});
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: "Error while saving comment"})
   }
 })
 
