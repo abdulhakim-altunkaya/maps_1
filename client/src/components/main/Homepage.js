@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/TableStyles.css';
-import Comment from "./Comment";
+
 
 function Homepage() {
   const navigate = useNavigate();
@@ -67,7 +67,7 @@ function Homepage() {
       ) : (
         <p>Probably you do not have internet now. Website Administrator: drysoftware1@gmail.com</p>
       )}
-      <Comment />
+
     </div>
   );
 }

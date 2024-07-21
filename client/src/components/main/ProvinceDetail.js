@@ -3,8 +3,11 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import ProvinceDetailDown from './ProvinceDetailDown';
 import '../../styles/ProvinceTable.css';
+import Comment from "./Comment";
+import CommentDisplay from './CommentDisplay';
 
 function ProvinceDetail() {
+
   const [message, setMessage] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
 
@@ -68,6 +71,8 @@ function ProvinceDetail() {
           </table>
         </>
       )}
+      <Comment />
+      <CommentDisplay />
     </div>
   );
 }

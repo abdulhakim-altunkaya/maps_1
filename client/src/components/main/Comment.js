@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
+import { useParams } from 'react-router-dom';
 import axios from "axios";
 import "../../styles/Comment.css";
 
 function Comment() {
-
+    const { provinceId } = useParams();
     const [name, setName] = useState("");
     const [text, setText] = useState("");
     
@@ -19,7 +20,7 @@ function Comment() {
         e.preventDefault();
         if (name && text) {
             const date = new Date().toLocaleDateString('en-GB');
-            const newComment = {name, text, date};
+            const newComment = {provinceId, name, text, date};
             console.log(newComment);
             setName("");
             setText("");

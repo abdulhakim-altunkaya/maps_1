@@ -99,15 +99,32 @@ app.get("/serversenddistrictdetails/:iddist", async (req, res) => {
   }
 });
 
+//add some input checks here to prevent user mistakes
 app.post("/serversavecomment", async (req, res) => {
   const newComment = req.body;
-  const {name, text, date} = newComment;
+  const {provinceId, name, text, date} = newComment;
   try {
     const client = await pool.connect();
     const result = await client.query(
-      `INSERT INTO comments (date, name, comment) values ($1, $2, $3)`, [date, name, text]
+      `INSERT INTO comments (provinceid, date, name, comment) values ($1, $2, $3, $4)`, [provinceId, date, name, text]
     );
     res.status(201).json({message: "Yorum kaydedildi"});
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: "Error while saving comment"})
+  }
+})
+
+app.get("/servergetcomments/:idpro", async (req, res) => {
+  const { idpro } = req.params;
+  try {
+    const client = await pool.connect();
+    const result = await client.query(
+      `SELECT * FROM comments WHERE provinceid = $1 ORDER BY id DESC`, [idpro]
+    );
+    const allComments = result.rows;
+    client.release();
+    res.status(200).json(allComments);
   } catch (error) {
     console.log(error.message);
     res.status(500).json({message: "Error while saving comment"})
