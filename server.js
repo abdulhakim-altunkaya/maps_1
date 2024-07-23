@@ -131,6 +131,28 @@ app.get("/servergetcomments/:idpro", async (req, res) => {
   }
 })
 
+app.get("/servergetforeigners/:idpro", async (req, res) => {
+  const { idpro } = req.params;
+  if(!idpro) {
+    return res.status(404).json({message: "City id is required"});
+  }
+
+  try {
+    const client = await pool.connect();
+    const result = await client.query(
+      `SELECT * FROM foreignerstable WHERE provinceid = $1`, [idpro]
+    );
+    const provinceForeigners = await result.rows[0];
+    client.release();
+    if(!provinceForeigners) {
+      return res.status(404).json({ message: "City details not found although city id is correct"})
+    }
+    res.status(200).json(provinceForeigners);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: "Error at the Backend: Couldnt fetch province details"})
+  }
+});
 
 const PORT = process.env.port || 5000;
 app.listen(PORT, () => {
