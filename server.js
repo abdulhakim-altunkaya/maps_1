@@ -154,6 +154,29 @@ app.get("/servergetforeigners/:idpro", async (req, res) => {
   }
 });
 
+app.get("/servergetprovinceorigins/:idpro", async (req, res) => {
+  const { idpro } = req.params;
+  if (!idpro) {
+    return res.status(404).json({ message: "City id is required" });
+  }
+  try {
+    const client = await pool.connect();
+    const result = await client.query(
+      'SELECT * FROM origins WHERE provinceid = $1', [idpro]
+    );
+    const provinceOrigins = result.rows;
+    client.release();
+    if (!provinceOrigins || provinceOrigins.length === 0) {
+      return res.status(404).json({ message: "City details not found although city id is correct" });
+    }
+    res.status(200).json(provinceOrigins);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ message: "Error at the Backend: Couldnt fetch province details" });
+  }
+});
+
+
 const PORT = process.env.port || 5000;
 app.listen(PORT, () => {
   console.log("Port is open on " + PORT);
@@ -162,4 +185,6 @@ app.listen(PORT, () => {
 //implement a settimeout for all components
 //create a comment section and place it under all components
 //Later, can you also create a comment database for eumaps?
+//order the origins from big to small and a sum to the end
+
 //

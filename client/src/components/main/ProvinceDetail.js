@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import ProvinceDetailDown from './ProvinceDetailDown';
+import ProvinceOrigins from './ProvinceOrigins';
 import '../../styles/ProvinceTable.css';
 import Comment from "./Comment";
 import CommentDisplay from './CommentDisplay';
@@ -75,6 +76,7 @@ function ProvinceDetail() {
           </table>
         </>
       )}
+      <ProvinceOrigins />
       <Comment />
       <CommentDisplay />
     </div>
