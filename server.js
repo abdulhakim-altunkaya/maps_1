@@ -154,6 +154,10 @@ app.get("/servergetforeigners/:idpro", async (req, res) => {
   }
 });
 
+
+
+
+
 app.get("/servergetprovinceorigins/:idpro", async (req, res) => {
   const { idpro } = req.params;
   if (!idpro) {
@@ -165,11 +169,33 @@ app.get("/servergetprovinceorigins/:idpro", async (req, res) => {
       'SELECT * FROM origins WHERE provinceid = $1', [idpro]
     );
     const provinceOrigins = result.rows;
+
+    //People from a province list is unorganized. Here we are organizing it from big to small.
+    //Separate keys that are containing population
+    //Then sort the keys by their values from big to small.
+    const provinceOrigins2 = result.rows[0];
+    const { provinceid, provincename, ...rest } = provinceOrigins2;
+    const basicInfo = { provinceid, provincename };
+    const populationData = rest;
+
+    // Convert object to an array of key-value pairs
+    const dataArray = Object.entries(populationData);
+    // Sort the array by numeric value in descending order
+    dataArray.sort((a, b) => Number(b[1]) - Number(a[1]));
+    // Convert back to an object
+    const sortedList = Object.fromEntries(dataArray);
+
+    //Also lets send total number of people from a region
+    const totalPopulation = Object.values(sortedList).reduce((acc, value) => acc + Number(value), 0);
+
+    //I am adding array brackets here because frontend needs it in an array
+    const combinedData = [{ ...basicInfo, originPopulation: totalPopulation, ...sortedList }];
+
     client.release();
-    if (!provinceOrigins || provinceOrigins.length === 0) {
+    if (!combinedData || combinedData.length === 0) {
       return res.status(404).json({ message: "City details not found although city id is correct" });
     }
-    res.status(200).json(provinceOrigins);
+    res.status(200).json(combinedData);
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: "Error at the Backend: Couldnt fetch province details" });

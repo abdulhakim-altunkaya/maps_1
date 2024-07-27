@@ -9,30 +9,34 @@ function ProvinceOrigins() {
   const [headers, setHeaders] = useState([]);
   const [provinceTitle, setProvinceTitle] = useState("");
   const [provinceTitle2, setProvinceTitle2] = useState("");
+  const [provinceTitle3, setProvinceTitle3] = useState("");
+  const [originPopulation2, setOriginPopulation2] = useState("");
 
   useEffect(() => {
     const getData = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/servergetprovinceorigins/${provinceId}`);
         const responseData = response.data;
-        console.log("Response Data:", responseData); // Log the response data for debugging
-
+        
         if (responseData && responseData.length > 0) {
           const provinceData = responseData[0];
           setMessage(responseData);
 
-          const headersData = Object.keys(provinceData).filter(key => key !== 'provinceid' && key !== 'provincename');
+          const headersData = Object.keys(provinceData).filter(key => key !== 'provinceid' && key !== 'provincename' && key !== 'originPopulation');
           setHeaders(headersData);
 
+          setOriginPopulation2(provinceData.originPopulation);
           const provinceName1 = provinceData.provincename;
           if (provinceName1) {
             const provinceName2 = provinceName1.slice(-2); // Get the last two characters of the city
             if (provinceName2.includes("i") || provinceName2.includes("e")) {
               setProvinceTitle(`${provinceName1}lilerin`);
               setProvinceTitle2(`${provinceName1}liler`);
+              setProvinceTitle3(`${provinceName1}li`);
             } else {
               setProvinceTitle(`${provinceName1}lıların`);
               setProvinceTitle2(`${provinceName1}lılar`);
+              setProvinceTitle3(`${provinceName1}lı`);
             }
           } else {
             console.error("provincename is undefined");
@@ -69,6 +73,11 @@ function ProvinceOrigins() {
                 <td>{message[0][header]}</td>
               </tr>
             ))}
+              <tr>
+                <td></td>
+                <td>Toplam {provinceTitle3}</td>
+                <td>{originPopulation2}</td>
+              </tr>
           </tbody>
         </table>
       ) : (
