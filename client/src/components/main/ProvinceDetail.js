@@ -6,12 +6,18 @@ import ProvinceOrigins from './ProvinceOrigins';
 import '../../styles/ProvinceTable.css';
 import Comment from "./Comment";
 import CommentDisplay from './CommentDisplay';
+//We will zustand to store province population and use in ProvinceOrigins component
+import useStore from '../../store/useStore';
 
 function ProvinceDetail() {
 
   const [message, setMessage] = useState([]);
   const [foreigners, setForeigners] = useState([]);
   const [loading, setLoading] = useState(true); // Add loading state
+
+  //We are using zustand store here to grab province population and save it there. Later
+  //We will use it in ProvinceOrigin component
+  const setProvincePopulation = useStore((state) => state.setProvincePopulation);
 
   const { provinceId } = useParams();
 
@@ -23,6 +29,8 @@ function ProvinceDetail() {
         const foreignersData = await axios.get(`http://localhost:5000/servergetforeigners/${provinceId}`);
         setMessage(response.data);
         setForeigners(foreignersData.data);
+        //save province population to zustand and later use it in ProvinceOrigin component
+        setProvincePopulation(Number(response.data[2023]));
       } catch (error) {
         console.log(error.message);
         setMessage("error happened");
