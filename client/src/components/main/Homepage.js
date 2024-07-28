@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../../styles/TableStyles.css';
+import HomepageInt from './HomepageInt';
 
 
 function Homepage() {
@@ -67,7 +68,7 @@ function Homepage() {
       ) : (
         <p>Probably you do not have internet now. Website Administrator: drysoftware1@gmail.com</p>
       )}
-
+      <HomepageInt />
     </div>
   );
 }

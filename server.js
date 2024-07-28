@@ -202,6 +202,21 @@ app.get("/servergetprovinceorigins/:idpro", async (req, res) => {
   }
 });
 
+app.get("/servergetinternational", async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query(
+      `SELECT * FROM international`
+    );
+    const dbprovinces = result.rows;
+    client.release();
+    res.status(200).json(dbprovinces);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: "Error at the Backend while fetching international data"});
+  }
+})
+
 
 const PORT = process.env.port || 5000;
 app.listen(PORT, () => {
@@ -212,5 +227,9 @@ app.listen(PORT, () => {
 //create a comment section and place it under all components
 //Later, can you also create a comment database for eumaps?
 //order the origins from big to small and a sum to the end
-
+//Create a bottom section that will contain about
+//Maybe a donate section?
+//Also integrate website visitor counter
+//comment upvote downvote
+//better error management
 //
