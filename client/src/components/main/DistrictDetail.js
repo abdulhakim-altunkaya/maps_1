@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import '../../styles/ProvinceTable.css';
+import Footer from './Footer';
 
 function DistrictDetail() {
   const [message, setMessage] = useState(null); // Initialize with null to better handle initial state
@@ -52,6 +53,7 @@ function DistrictDetail() {
       ) : (
         <p>No data available</p> // Handle case where message is null or empty
       )}
+      <Footer />
     </div>
   );
 }

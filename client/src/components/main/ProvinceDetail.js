@@ -6,6 +6,7 @@ import ProvinceOrigins from './ProvinceOrigins';
 import '../../styles/ProvinceTable.css';
 import Comment from "./Comment";
 import CommentDisplay from './CommentDisplay';
+import Footer from './Footer';
 //We will zustand to store province population and use in ProvinceOrigins component
 import useStore from '../../store/useStore';
 
@@ -87,6 +88,7 @@ function ProvinceDetail() {
       <ProvinceOrigins />
       <Comment />
       <CommentDisplay />
+      <Footer />
     </div>
   );
 }
