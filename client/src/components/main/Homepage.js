@@ -16,6 +16,12 @@ function Homepage() {
       try {
         const response = await axios.get('http://localhost:5000/servergetprovinces');
         setMessage(response.data);
+        
+        // Send the request to log the visitor data without awaiting its completion
+        axios.post("http://localhost:5000/serversavevisitor", {}).catch((error) => {
+          console.error('Error logging visit:', error.message);
+        });
+
       } catch (error) {
         console.log(error.message);
         setMessage('error happened');

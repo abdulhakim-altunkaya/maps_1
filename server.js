@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 
 const { pool } = require("./db");
-
+const useragent = require('useragent');
 const cors = require("cors");
 app.use(cors());
 
@@ -154,10 +154,6 @@ app.get("/servergetforeigners/:idpro", async (req, res) => {
   }
 });
 
-
-
-
-
 app.get("/servergetprovinceorigins/:idpro", async (req, res) => {
   const { idpro } = req.params;
   if (!idpro) {
@@ -215,6 +211,43 @@ app.get("/servergetinternational", async (req, res) => {
     console.log(error.message);
     res.status(500).json({message: "Error at the Backend while fetching international data"});
   }
+});
+
+//A temporary cache to save ip addresses and it will prevent saving same ip addresses for 1 hour.
+//I can do that by checking each ip with database ip addresses but then it will be too many requests to db
+//We will save each visitor data to database. 
+const ipCache = {}
+app.post("/serversavevisitor", async (req, res) => {
+  const ipVisitor = req.ip;
+  
+  // Check if IP exists in cache and if last visit was less than 1 hour ago
+  if (ipCache[ipVisitor] && Date.now() - ipCache[ipVisitor] < 3600000) {
+    return res.status(429).json({message: 'Too many requests from this IP. Please try again later.'});
+  }
+  const userAgentString = req.get('User-Agent');
+  const agent = useragent.parse(userAgentString);
+
+  try {
+    const visitorData = {
+      ip: ipVisitor,
+      os: agent.os.toString(), // operating system
+      browser: agent.toAgent(), // browser
+      visitDate: new Date().toLocaleDateString('en-GB'),
+      visitTime: new Date()
+    };
+    //save visitor to database
+    const client = await pool.connect();
+    const result = await client.query(
+      `INSERT INTO visitor_log (ip, op, browser, date, timestamp) 
+      VALUES ($1, $2, $3, $4, $5)`, [visitorData.ip, visitorData.os, visitorData.browser, visitorData.visitDate, visitorData.visitTime]
+    );
+    client.release();
+    ipCache[ipVisitor] = Date.now();//save visitor ip to ipCache
+    res.status(200).json({message: "Visitor IP successfully logged"});
+  } catch (error) {
+    console.error('Error logging visit:', error);
+    res.status(500).json({message: 'Error logging visit'});
+  }
 })
 
 
@@ -223,13 +256,12 @@ app.listen(PORT, () => {
   console.log("Port is open on " + PORT);
 });
 
-//implement a settimeout for all components
+//Add loading logic to all tables
 //create a comment section and place it under all components
 //Later, can you also create a comment database for eumaps?
-//order the origins from big to small and a sum to the end
 //Create a bottom section that will contain about
 //Maybe a donate section?
-//Also integrate website visitor counter
+//Also integrate website visitor counter - How to make visitor counter faster? Maybe I can play with async ?
 //comment upvote downvote
 //better error management
 //
