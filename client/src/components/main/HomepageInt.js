@@ -3,6 +3,7 @@ import axios from 'axios';
 import '../../styles/ProvinceTable.css';
 
 function HomepageInt() {
+    
     const [message, setMessage] = useState([]);
     const [loading, setLoading] = useState(true); // Add loading state
 

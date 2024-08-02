@@ -224,9 +224,10 @@ app.post("/serversavevisitor", async (req, res) => {
   if (ipCache[ipVisitor] && Date.now() - ipCache[ipVisitor] < 3600000) {
     return res.status(429).json({message: 'Too many requests from this IP. Please try again later.'});
   }
+  ipCache[ipVisitor] = Date.now();//save visitor ip to ipCache
   const userAgentString = req.get('User-Agent');
   const agent = useragent.parse(userAgentString);
-
+  
   try {
     const visitorData = {
       ip: ipVisitor,
@@ -241,8 +242,8 @@ app.post("/serversavevisitor", async (req, res) => {
       `INSERT INTO visitor_log (ip, op, browser, date, timestamp) 
       VALUES ($1, $2, $3, $4, $5)`, [visitorData.ip, visitorData.os, visitorData.browser, visitorData.visitDate, visitorData.visitTime]
     );
+    
     client.release();
-    ipCache[ipVisitor] = Date.now();//save visitor ip to ipCache
     res.status(200).json({message: "Visitor IP successfully logged"});
   } catch (error) {
     console.error('Error logging visit:', error);
@@ -257,11 +258,10 @@ app.listen(PORT, () => {
 });
 
 //Add loading logic to all tables
-//create a comment section and place it under all components
 //Later, can you also create a comment database for eumaps?
-//Create a bottom section that will contain about
+//Maybe you can add comment section for provinces also and also a like option and answer option
 //Maybe a donate section?
-//Also integrate website visitor counter - How to make visitor counter faster? Maybe I can play with async ?
-//comment upvote downvote
 //better error management
+//later add an ip anaylzer to see which country visited
+//Make sure the tables shrink with mobile size screen
 //

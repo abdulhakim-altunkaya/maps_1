@@ -16,7 +16,7 @@ function CommentDisplay() {
       } catch (error) {
           console.log(error.message);
           setError("Yorumlar Database'den alınmadı")
-      }
+      } 
     }
     getComments();
   }, [provinceId])

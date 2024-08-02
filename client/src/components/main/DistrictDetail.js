@@ -7,6 +7,7 @@ import Footer from './Footer';
 function DistrictDetail() {
   const [message, setMessage] = useState(null); // Initialize with null to better handle initial state
   const [error, setError] = useState(null); // Add error state
+  const [loading, setLoading] = useState(true); // Add loading state
 
   const { districtId } = useParams();
 
@@ -18,6 +19,8 @@ function DistrictDetail() {
       } catch (error) {
         console.log(error.message);
         setError("Error happened");
+      } finally {
+        setLoading(false);
       }
     };
     getData();
@@ -33,26 +36,32 @@ function DistrictDetail() {
 
   return (
     <div>
-      {message ? (
-        <>
-          <h2 style={{ fontFamily: 'Ubuntu' }}>Yıllara Göre {message.districtname} Nüfusu</h2>
-          <table className="provincetable">
-            <thead>
-              <tr>
-                <th>YIL</th>
-                <th>NÜFUS</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007].map(year => (
-                <tr key={year}><td>{year}</td><td>{formatNumber(message[year])}</td></tr>
-              ))}
-            </tbody>
-          </table>
-        </>
-      ) : (
-        <p>No data available</p> // Handle case where message is null or empty
-      )}
+      { loading ? 
+          <div>loading...</div>
+        :
+          <>
+            {message ? (
+              <>
+                <h2 style={{ fontFamily: 'Ubuntu' }}>Yıllara Göre {message.districtname} Nüfusu</h2>
+                <table className="provincetable">
+                  <thead>
+                    <tr>
+                      <th>YIL</th>
+                      <th>NÜFUS</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007].map(year => (
+                      <tr key={year}><td>{year}</td><td>{formatNumber(message[year])}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+              </>
+            ) : (
+              <p>No data available</p> // Handle case where message is null or empty
+            )}
+          </>
+      }
       <Footer />
     </div>
   );

@@ -15,6 +15,7 @@ function ProvinceOrigins() {
   const [provinceTitle4, setProvinceTitle4] = useState("");
   const [provinceTitle5, setProvinceTitle5] = useState("");
   const [originPopulation2, setOriginPopulation2] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   //First we get province population from zustand. We could do it outside useEffect but better to do it here. 
   const provincePopulation = useStore((state) => state.provincePopulation);
@@ -58,6 +59,8 @@ function ProvinceOrigins() {
       } catch (error) {
         console.log(error);
         setMessage("error happened");
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -70,45 +73,52 @@ function ProvinceOrigins() {
 
   return (
     <div>
-      <h2 style={{ fontFamily: "Ubuntu" }}>{provinceTitle} En Çok Yaşadığı İller</h2>
-      {Array.isArray(message) ? (
-        <div>
-          <table className="provinceDistrictTable">
-            <thead>
-              <tr>
-                <th>SIRA</th>
-                <th>İLLER</th>
-                <th>{provinceTitle2}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {headers.map((header, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{header}</td>
-                  <td>{formatNumber(message[0][header])}</td>
-                </tr>
-              ))}
-                <tr>
-                  <td></td>
-                  <td><strong>Toplam {provinceTitle3}</strong></td>
-                  <td>{formatNumber(originPopulation2)}</td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td><strong>{provinceTitle4} İl Nüfusu</strong></td>
-                  <td>{formatNumber(provincePopulation)}</td>
-                </tr>
-            </tbody>
-          </table>
-          <br/>
-          <div className='notesArea'><strong>{provinceTitle3}:</strong> Türkiye'de yaşayan ve Kütük kaydı {provinceTitle5} olanlar.</div>
-          <div className='notesArea'><strong>{provinceTitle4} İl Nüfus:</strong> Adres kaydı {provinceTitle5} olanlar.</div>
-          <br/>
-        </div>
-      ) : (
-        <p>Error, please write to website administrator: drysoftware1@gmail.com</p>
-      )}
+      { isLoading ? 
+          <div>loading...</div>
+        :
+          <>
+            <h2 style={{ fontFamily: "Ubuntu" }}>{provinceTitle} En Çok Yaşadığı İller</h2>
+            {Array.isArray(message) ? (
+              <div>
+                <table className="provinceDistrictTable">
+                  <thead>
+                    <tr>
+                      <th>SIRA</th>
+                      <th>İLLER</th>
+                      <th>{provinceTitle2}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {headers.map((header, index) => (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{header}</td>
+                        <td>{formatNumber(message[0][header])}</td>
+                      </tr>
+                    ))}
+                      <tr>
+                        <td></td>
+                        <td><strong>Toplam {provinceTitle3}</strong></td>
+                        <td>{formatNumber(originPopulation2)}</td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td><strong>{provinceTitle4} İl Nüfusu</strong></td>
+                        <td>{formatNumber(provincePopulation)}</td>
+                      </tr>
+                  </tbody>
+                </table>
+                <br/>
+                <div className='notesArea'><strong>{provinceTitle3}:</strong> Türkiye'de yaşayan ve Kütük kaydı {provinceTitle5} olanlar.</div>
+                <div className='notesArea'><strong>{provinceTitle4} İl Nüfus:</strong> Adres kaydı {provinceTitle5} olanlar.</div>
+                <br/>
+              </div>
+            ) : (
+              <p>Error, please write to website administrator: drysoftware1@gmail.com</p>
+            )}
+          </>
+      }
+      
     </div>
   );
 }
