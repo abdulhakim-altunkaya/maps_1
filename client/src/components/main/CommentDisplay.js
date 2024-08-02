@@ -14,7 +14,7 @@ function CommentDisplay() {
           const response = await axios.get(`http://localhost:5000/servergetcomments/${provinceId}`);
           setComments(response.data);
       } catch (error) {
-          console.log(error.message);
+          console.log("Error fetching comments:", error.message);
           setError("Yorumlar Database'den alınmadı")
       } 
     }
