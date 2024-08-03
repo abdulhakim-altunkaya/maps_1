@@ -24,6 +24,12 @@
     justify-content: space-between;
     margin-bottom: 5px;
   }
+
+  .comment-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
   
   .comment-name {
     font-weight: bold;
@@ -38,5 +44,22 @@
     font-size: 1em;
     line-height: 1.4;
     text-align: left;
+  }
+
+  .replyCommentBtn {
+    background-color: #4b97fc;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 17px;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .replyCommentBtn:hover {
+    background-color: #0354c0;
+  }
+  .replyCommentBtn:active {
+    box-shadow: 0 2px #666;
+    transform: translateY(2px);
   }
   
