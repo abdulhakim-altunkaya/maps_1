@@ -107,11 +107,29 @@ app.get("/serversenddistrictdetails/:iddist", async (req, res) => {
   }
 });
 
-//add some input checks here to prevent user mistakes
 app.post("/serversavecomment", async (req, res) => {
   let client;
   const newComment = req.body;
   const {provinceId, name, text, date} = newComment;
+  
+  
+  // Input checks to prevent user mistakes
+  if (!provinceId || !name || !text || !date) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+  if (typeof provinceId !== 'number') {
+    return res.status(400).json({ message: "provinceId must be a number" });
+  }
+  if (typeof name !== 'string' || name.trim().length === 0) {
+    return res.status(400).json({ message: "Name must be a non-empty string" });
+  }
+  if (typeof text !== 'string' || text.trim().length === 0) {
+    return res.status(400).json({ message: "Text must be a non-empty string" });
+  }
+  if (isNaN(Date.parse(date))) {
+    return res.status(400).json({ message: "Date must be a valid date" });
+  }
+
   try {
     client = await pool.connect();
     const result = await client.query(
@@ -124,7 +142,44 @@ app.post("/serversavecomment", async (req, res) => {
   } finally {
     if(client) client.release();
   }
-})
+});
+app.post("/serversavecommentreply", async (req, res) => {
+  let client;
+  const newComment = req.body;
+  const {provinceId, name, text, date, commentId} = newComment;
+  
+  
+  // Input checks to prevent user mistakes
+  if (!provinceId || !name || !text || !date || !commentId) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+  if (typeof provinceId !== 'number') {
+    return res.status(400).json({ message: "provinceId must be a number" });
+  }
+  if (typeof name !== 'string' || name.trim().length === 0) {
+    return res.status(400).json({ message: "Name must be a non-empty string" });
+  }
+  if (typeof text !== 'string' || text.trim().length === 0) {
+    return res.status(400).json({ message: "Text must be a non-empty string" });
+  }
+  if (isNaN(Date.parse(date))) {
+    return res.status(400).json({ message: "Date must be a valid date" });
+  }
+
+  try {
+    client = await pool.connect();
+    const result = await client.query(
+      `INSERT INTO comments (provinceid, date, name, comment, parent_id) values ($1, $2, $3, $4, $5)`, 
+      [provinceId, date, name, text, commentId]
+    );
+    res.status(201).json({message: "Cevap kaydedildi"});
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({message: "Error while saving reply"})
+  } finally {
+    if(client) client.release();
+  }
+});
 
 app.get("/servergetcomments/:idpro", async (req, res) => {
   let client;

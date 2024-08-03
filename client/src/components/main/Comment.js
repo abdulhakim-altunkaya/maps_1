@@ -20,7 +20,12 @@ function Comment() {
         e.preventDefault();
         if (name && text) {
             const date = new Date().toLocaleDateString('en-GB');
-            const newComment = {provinceId, name, text, date};
+            const newComment = {
+                provinceId: Number(provinceId), // Ensure provinceId is a number
+                name,
+                text,
+                date
+            }
             console.log(newComment);
             setName("");
             setText("");
@@ -28,7 +33,7 @@ function Comment() {
             alert(response.data.message);
         } else {
             alert("Please fill in comment fields");
-        }
+        } 
     }
     return (
         <div className="comment-container">
