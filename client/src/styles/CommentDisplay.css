@@ -6,6 +6,7 @@
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: "Ubuntu";
   }
   
   .error-message {
@@ -17,6 +18,7 @@
     padding: 10px;
     margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
+    font-family: "Ubuntu";
   }
   
   .comment-header {
@@ -36,12 +38,12 @@
   }
   
   .comment-date {
-    font-size: 0.85em;
+    font-size: 0.80em;
     color: #555;
   }
   
   .comment-text {
-    font-size: 1em;
+    font-size: 0.85em;
     line-height: 1.4;
     text-align: left;
   }
@@ -49,11 +51,13 @@
   .replyCommentBtn {
     background-color: #4b97fc;
     padding: 5px 10px;
+    margin-top: 7px;
     border-radius: 3px;
     font-size: 17px;
     color: white;
     border: none;
     cursor: pointer;
+    font-family: "Ubuntu";
   }
   .replyCommentBtn:hover {
     background-color: #0354c0;
