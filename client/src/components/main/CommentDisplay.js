@@ -52,7 +52,12 @@ function CommentDisplay() {
                 <div className='comment-body'>
                   <div className="comment-text">{comment.comment}</div>
                   {replies.map( (reply, index) => (
-                    <span key={index}>{reply.comment}</span>
+                    replies.parent_id === comment.id ? 
+                        <div className="replyDiv" key={index}>
+                          <span>{reply.comment}</span> 
+                        </div>
+                      : 
+                        <></>
                   ))}
                   <button className='replyCommentBtn' onClick={() => replyComment(comment.id)}>Cevapla</button>
                   { isReply ? 
@@ -65,6 +70,9 @@ function CommentDisplay() {
                   }
                 </div>
             </div>
+        ))}
+        {replies.map((reply, index) => (
+          <div key={index}>{reply.comment}</div>
         ))}
       </div>
     </>

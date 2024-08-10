@@ -6,7 +6,16 @@
   margin-bottom: 10px;
   border-radius: 5px;
   display: flex;
+  
+}
+.replyDiv {
+  font-family: "Ubuntu";
+  font-size: 10px;
+  margin-left: 15px;
+  display: flex;
+  justify-content: flex-start;
   align-items: flex-start;
+  align-self: flex-start;
 }
 
 /* .reply-header {
