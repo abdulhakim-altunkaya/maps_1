@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from "axios";
 import "../../styles/Comment.css";
 
-function CommentReply({commentId}) {
+function CommentReply({commentId2}) {
     const { provinceId } = useParams();
     const [name, setName] = useState("");
     const [text, setText] = useState("");
@@ -25,9 +25,10 @@ function CommentReply({commentId}) {
                 name,
                 text,
                 date,
-                commentId: Number(commentId) // Ensure commentId is a number
+                commentId: Number(commentId2) // Ensure commentId is a number
             }
             console.log(newComment);
+            console.log(commentId2);
             setName("");
             setText("");
             const response = await axios.post("http://localhost:5000/serversavecommentreply", newComment)
