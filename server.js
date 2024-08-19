@@ -107,12 +107,23 @@ app.get("/serversenddistrictdetails/:iddist", async (req, res) => {
   }
 });
 
+//A temporary cache to save ip addresses and it will prevent spam comments for 1 minute.
+//I can do that by checking each ip with database ip addresses but then it will be too many requests to db
+const ipCache2 = {}
 app.post("/serversavecomment", async (req, res) => {
+  //preventing spam comments
+  const ipVisitor = req.ip;
+  // Check if IP exists in cache and if last comment was less than 1 minute ago
+  if (ipCache2[ipVisitor] && Date.now() - ipCache2[ipVisitor] < 60000) {
+    return res.status(429).json({message: 'Too many comments'});
+  }
+  ipCache2[ipVisitor] = Date.now();//save visitor ip to ipCache2
+
   let client;
   const newComment = req.body;
   const {provinceId, name, text, date} = newComment;
   
-  
+  /*
   // Input checks to prevent user mistakes
   if (!provinceId || !name || !text || !date) {
     return res.status(400).json({ message: "All fields are required" });
@@ -129,6 +140,7 @@ app.post("/serversavecomment", async (req, res) => {
   if (isNaN(Date.parse(date))) {
     return res.status(400).json({ message: "Date must be a valid date" });
   }
+    */
 
   try {
     client = await pool.connect();

@@ -50,8 +50,8 @@ function CommentDisplay() {
       { isReply ? <Comment /> : <div></div> }
       <div className="comments-list">
         {error ? <div className="error-message">{error}</div> : <></>}
-        {comments.filter(comment => comment.parent_id === null).map( (comment) => (
-            <div key={comment.id} className="comment-item">
+        {comments.filter(comment => comment.parent_id === null).map( (comment, index) => (
+            <div key={index} className="comment-item">
                 <div className="comment-header">
                   <span className="comment-name">{comment.name}</span>
                   <span className="comment-date">{comment.date}</span>
@@ -60,21 +60,20 @@ function CommentDisplay() {
                   <div className="comment-text">{comment.comment}</div>
                   {replies.map( (reply, index) => (
                     reply.parent_id === comment.id ? 
-                        <div key={index}
-                          style={{paddingLeft:"20px", fontFamily: "Kanit", textAlign: "left !important"}}>
-                          <span>{reply.comment}</span> 
+                        <div key={index} className='replyCommentContainer'>
+                          <span style={{paddingTop: "10px"}}><strong>{reply.name}</strong> ({reply.date}): {reply.comment}</span>
                         </div>
                       : 
-                        <></>
+                        null
                   ))}
                   <button className='replyCommentBtn' onClick={() => replyComment(comment.id)}>Cevapla</button>
                   { isCommentReply ? 
                       repliedCommentId === comment.id ?
                           <CommentReply commentId2={comment.id} /> 
                         :
-                          <></>
+                          null
                       :
-                      <></>
+                      null
                   }
                 </div>
             </div>

@@ -22,7 +22,7 @@
   }
   
   .comment-header {
-    display: flex;
+    display: flex; 
     justify-content: space-between;
     margin-bottom: 5px;
   }
@@ -65,5 +65,15 @@
   .replyCommentBtn:active {
     box-shadow: 0 2px #666;
     transform: translateY(2px);
+  }
+
+  .replyCommentContainer {
+    display: flex;
+    font-family: "Ubuntu" !important;
+    flex-direction: column;
+    font-size: 15px !important;
+    justify-content: space-between;
+    padding-left: 25px;
+    text-align: left !important;
   }
   
