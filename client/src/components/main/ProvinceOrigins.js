@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import '../../styles/ProvinceDistrict.css';
+import '../../styles/ProvinceOrigins.css';
 //We will get Province Populatino from Zustand and Zustand will grab it from ProvinceDetail component
 import useStore from '../../store/useStore';
+
 
 function ProvinceOrigins() {
   const { provinceId } = useParams();
@@ -72,7 +74,7 @@ function ProvinceOrigins() {
   };
 
   return (
-    <div>
+    <div className='provinceOriginsDiv'>
       { isLoading ? 
           <div>loading...</div>
         :
