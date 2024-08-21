@@ -7,7 +7,7 @@ import '../../styles/Footer.css';
 
 const Footer = () => {
   const navigate = useNavigate();
-
+ 
   const handleHomeClick = () => {
     navigate('/');
     window.scrollTo({ top: 0, behavior: 'smooth' });

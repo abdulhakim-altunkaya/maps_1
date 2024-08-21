@@ -27,12 +27,19 @@ function CommentReply({commentId2}) {
                 date,
                 commentId: Number(commentId2) // Ensure commentId is a number
             }
-            console.log(newComment);
-            console.log(commentId2);
-            setName("");
-            setText("");
-            const response = await axios.post("http://localhost:5000/serversavecommentreply", newComment)
-            alert(response.data.message);
+            try {
+                const response = await axios.post("http://localhost:5000/serversavecommentreply", newComment)
+                alert(response.data.message);
+            } catch (error) {
+                if (error.response && error.response.status === 429) {
+                    alert("Yeni cevap için biraz bekleyiniz.");
+                } else {
+                    alert("An error occurred while saving your comment. Please try again later.");
+                } 
+            } finally {
+                setName("");
+                setText("");
+            }
         } else {
             alert("Please fill in comment fields");
         } 

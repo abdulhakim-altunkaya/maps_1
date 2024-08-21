@@ -26,13 +26,21 @@ function Comment() {
                 text,
                 date
             }
-            console.log(newComment);
-            setName("");
-            setText("");
-            const response = await axios.post("http://localhost:5000/serversavecomment", newComment)
-            alert(response.data.message);
+            try {
+                const response = await axios.post("http://localhost:5000/serversavecomment", newComment)
+                alert(response.data.message);
+            } catch (error) {
+                if (error.response && error.response.status === 429) {
+                    alert("Yeni yorum için biraz bekleyiniz.");
+                } else {
+                    alert("Yorumunuzu kaydederken hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
+                } 
+            } finally {
+                setName("");
+                setText("");
+            }
         } else {
-            alert("Please fill in comment fields");
+            alert("Bütün alanları doldurunuz");
         } 
     }
     return (

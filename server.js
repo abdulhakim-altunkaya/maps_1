@@ -107,7 +107,7 @@ app.get("/serversenddistrictdetails/:iddist", async (req, res) => {
   }
 });
 
-//A temporary cache to save ip addresses and it will prevent spam comments for 1 minute.
+//A temporary cache to save ip addresses and it will prevent spam comments and replies for 1 minute.
 //I can do that by checking each ip with database ip addresses but then it will be too many requests to db
 const ipCache2 = {}
 app.post("/serversavecomment", async (req, res) => {
@@ -156,6 +156,15 @@ app.post("/serversavecomment", async (req, res) => {
   }
 });
 app.post("/serversavecommentreply", async (req, res) => {
+  //preventing spam replies
+  const ipVisitor = req.ip;
+  // Check if IP exists in cache and if last reply was less than 1 minute ago
+  if (ipCache2[ipVisitor] && Date.now() - ipCache2[ipVisitor] < 60000) {
+    return res.status(429).json({message: 'Too many comments'});
+  }
+  ipCache2[ipVisitor] = Date.now();//save visitor ip to ipCache2
+
+
   let client;
   const newComment = req.body;
   const {provinceId, name, text, date, commentId} = newComment;
@@ -325,9 +334,7 @@ app.listen(PORT, () => {
 });
 
 
-//Maybe you can add comment section for provinces also and also a like option and answer option
 //Maybe a donate section?
-//better error management
 //later add an ip anaylzer to see which country visited
 //Make sure the tables shrink with mobile size screen
 
@@ -336,4 +343,3 @@ app.listen(PORT, () => {
 //You can remove cors before production
 //Fix server api routes before production, remove "localhost" part
 //add environment variables
-//
