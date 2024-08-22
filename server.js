@@ -333,11 +333,6 @@ app.listen(PORT, () => {
   console.log("Port is open on " + PORT);
 });
 
-
-//Maybe a donate section?
-//later add an ip anaylzer to see which country visited
-//Make sure the tables shrink with mobile size screen
-
 //remove "build" from gitignore before production deployment
 //create "build" folder
 //You can remove cors before production

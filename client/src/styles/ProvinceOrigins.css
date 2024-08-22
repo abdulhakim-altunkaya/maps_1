@@ -2,7 +2,7 @@
   @media (max-width: 768px) {
 
     .provinceOriginsDiv {
-      margin-left: -30px !important;
+      margin-left: -25px !important;
       width: 96% !important; /* Ensure the container takes full width on mobile */
 
       font-size: 13px !important;
