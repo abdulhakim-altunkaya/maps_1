@@ -25,7 +25,7 @@ function ProvinceOrigins() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/servergetprovinceorigins/${provinceId}`);
+        const response = await axios.get(`/servergetprovinceorigins/${provinceId}`);
         const responseData = response.data;
         
         if (responseData && responseData.length > 0) {

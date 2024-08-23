@@ -28,7 +28,7 @@ function CommentReply({commentId2}) {
                 commentId: Number(commentId2) // Ensure commentId is a number
             }
             try {
-                const response = await axios.post("http://localhost:5000/serversavecommentreply", newComment)
+                const response = await axios.post("/serversavecommentreply", newComment)
                 alert(response.data.message);
             } catch (error) {
                 if (error.response && error.response.status === 429) {

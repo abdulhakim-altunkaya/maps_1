@@ -10,7 +10,7 @@ function HomepageInt() {
     useEffect(() => {
       const getData = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/servergetinternational`);
+            const response = await axios.get(`/servergetinternational`);
             setMessage(response.data);
         } catch (error) {
             console.log(error.message);

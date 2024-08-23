@@ -15,7 +15,7 @@ function ProvinceDetailDown() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/serversendprovincedistrictdetails/${provinceId}`);
+        const response = await axios.get(`/serversendprovincedistrictdetails/${provinceId}`);
         setMessage(response.data);
         setProvinceTitle(response.data[0].provincename);
 

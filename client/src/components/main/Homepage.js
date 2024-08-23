@@ -14,12 +14,12 @@ function Homepage() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/servergetprovinces');
+        const response = await axios.get('/servergetprovinces');
         setMessage(response.data);
         
         // Send the request to log the visitor data without awaiting its completion
-        axios.post("http://localhost:5000/serversavevisitor", {}).catch((error) => {
-          console.error('Error logging visit:', error.message);
+        axios.post("/serversavevisitor", {}).catch((error) => {
+          //console.error('Error logging visit:', error.message);
         });
 
       } catch (error) {

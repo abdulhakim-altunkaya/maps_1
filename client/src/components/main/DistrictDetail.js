@@ -15,7 +15,7 @@ function DistrictDetail() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/serversenddistrictdetails/${districtId}`);
+        const response = await axios.get(`/serversenddistrictdetails/${districtId}`);
         setMessage(response.data);
       } catch (error) {
         console.log(error.message);

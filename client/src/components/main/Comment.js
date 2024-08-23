@@ -27,7 +27,7 @@ function Comment() {
                 date
             }
             try {
-                const response = await axios.post("http://localhost:5000/serversavecomment", newComment)
+                const response = await axios.post("/serversavecomment", newComment)
                 alert(response.data.message);
             } catch (error) {
                 if (error.response && error.response.status === 429) {

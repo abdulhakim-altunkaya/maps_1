@@ -27,8 +27,8 @@ function ProvinceDetail() {
     const getData = async () => {
       setLoading(true); // Set loading to true before starting the fetch
       try {
-        const response = await axios.get(`http://localhost:5000/serversendprovincedetails/${provinceId}`);
-        const foreignersData = await axios.get(`http://localhost:5000/servergetforeigners/${provinceId}`);
+        const response = await axios.get(`/serversendprovincedetails/${provinceId}`);
+        const foreignersData = await axios.get(`/servergetforeigners/${provinceId}`);
         setMessage(response.data);
         setForeigners(foreignersData.data);
         //save province population to zustand and later use it in ProvinceOrigin component
