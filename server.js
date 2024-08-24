@@ -118,7 +118,7 @@ app.get("/serversenddistrictdetails/:iddist", async (req, res) => {
 const ipCache2 = {}
 app.post("/serversavecomment", async (req, res) => {
   //preventing spam comments
-  const ipVisitor = req.ip;
+  const ipVisitor = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(',')[0] : req.socket.remoteAddress || req.ip;
   // Check if IP exists in cache and if last comment was less than 1 minute ago
   if (ipCache2[ipVisitor] && Date.now() - ipCache2[ipVisitor] < 60000) {
     return res.status(429).json({message: 'Too many comments'});
@@ -162,8 +162,9 @@ app.post("/serversavecomment", async (req, res) => {
   }
 });
 app.post("/serversavecommentreply", async (req, res) => {
+  
   //preventing spam replies
-  const ipVisitor = req.ip;
+  const ipVisitor = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(',')[0] : req.socket.remoteAddress || req.ip;
   // Check if IP exists in cache and if last reply was less than 1 minute ago
   if (ipCache2[ipVisitor] && Date.now() - ipCache2[ipVisitor] < 60000) {
     return res.status(429).json({message: 'Too many comments'});
@@ -300,14 +301,16 @@ app.get("/servergetinternational", async (req, res) => {
 //We will save each visitor data to database. 
 const ipCache = {}
 app.post("/serversavevisitor", async (req, res) => {
-  const ipVisitor = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.ip;
+  //Here we could basically say "const ipVisitor = req.ip" but my app is running on Render platform
+  //and Render is using proxies or load balancers. Because of that I will see "::1" as ip data if I not use
+  //this line below
+  const ipVisitor = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(',')[0] : req.socket.remoteAddress || req.ip;
   let client;
-  /*
   // Check if IP exists in cache and if last visit was less than 1 hour ago
   if (ipCache[ipVisitor] && Date.now() - ipCache[ipVisitor] < 3600000) {
     return res.status(429).json({message: 'Too many requests from this IP. Please try again later.'});
   }
-  */
+
   ipCache[ipVisitor] = Date.now();//save visitor ip to ipCache
   const userAgentString = req.get('User-Agent');
   const agent = useragent.parse(userAgentString);
