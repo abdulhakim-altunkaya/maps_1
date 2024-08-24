@@ -302,10 +302,12 @@ const ipCache = {}
 app.post("/serversavevisitor", async (req, res) => {
   const ipVisitor = req.ip;
   let client;
+  /*
   // Check if IP exists in cache and if last visit was less than 1 hour ago
   if (ipCache[ipVisitor] && Date.now() - ipCache[ipVisitor] < 3600000) {
     return res.status(429).json({message: 'Too many requests from this IP. Please try again later.'});
   }
+  */
   ipCache[ipVisitor] = Date.now();//save visitor ip to ipCache
   const userAgentString = req.get('User-Agent');
   const agent = useragent.parse(userAgentString);
