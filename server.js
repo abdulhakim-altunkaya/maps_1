@@ -1,13 +1,19 @@
 const express = require("express");
 const app = express();
+const path = require('path');
 
 const { pool } = require("./db");
 const useragent = require('useragent');
-const cors = require("cors");
-app.use(cors());
+//const cors = require("cors");
+//app.use(cors());
 
 //we need this as we use req.body to send data from frontend to backend
 app.use(express.json());
+
+//Then go to server.js file and make sure you serve static files from build directory:
+app.use(express.static(path.join(__dirname, 'client/build')));
+//For serving from build directory, you need to install path package and initiate it:
+
 
 app.get("/serversendhello", (req, res) => {
   res.status(200).json({myMessage: "Hello from backend"});
