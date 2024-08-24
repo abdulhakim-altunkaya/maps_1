@@ -300,7 +300,7 @@ app.get("/servergetinternational", async (req, res) => {
 //We will save each visitor data to database. 
 const ipCache = {}
 app.post("/serversavevisitor", async (req, res) => {
-  const ipVisitor = req.ip;
+  const ipVisitor = req.headers['x-forwarded-for'] || req.connection.remoteAddress || req.ip;
   let client;
   /*
   // Check if IP exists in cache and if last visit was less than 1 hour ago
