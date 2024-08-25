@@ -5,7 +5,7 @@ import '../../styles/ProvinceTable.css';
 function HomepageInt() {
     
     const [message, setMessage] = useState([]);
-    const [loading, setLoading] = useState(true); // Add loading state
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
       const getData = async () => {
@@ -31,20 +31,20 @@ function HomepageInt() {
     return (
         <div>
             {loading ? (
-                <div>Loading...</div> // Display loading indicator
+                <div aria-live="polite">Loading...</div> 
                 ) : (
                     <>
                     <h2 style={{ fontFamily: 'Ubuntu' }}>TÜRKİYE'YE GELENLER VE GİDENLER</h2>
-                    <table className="provincetable">
+                    <table className="provincetable" aria-label="Türkiye'ye gelen ve giden toplam, Türk ve yabancı uyruklu kişi sayıları">
                         <thead>
                         <tr>
-                            <th></th>
-                            <th>Gelen Toplam</th>
-                            <th>Giden Toplam</th>
-                            <th>Gelen Türk</th>
-                            <th>Giden Türk</th>
-                            <th>Gelen Yabancı</th>
-                            <th>Giden Yabancı</th>
+                            <th scope="col">Yıl</th>
+                            <th scope="col">Gelen Toplam</th>
+                            <th scope="col">Giden Toplam</th>
+                            <th scope="col">Gelen Türk</th>
+                            <th scope="col">Giden Türk</th>
+                            <th scope="col">Gelen Yabancı</th>
+                            <th scope="col">Giden Yabancı</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -67,4 +67,4 @@ function HomepageInt() {
     )
 }
 
-export default HomepageInt
+export default HomepageInt;
