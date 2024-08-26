@@ -50,16 +50,16 @@ function Comment() {
                     <label htmlFor='name'>İsim ve Soyisim</label>
                     <input type='text' id='name' required placeholder='İsim ve Soyisim' maxLength={30} 
                         value={name}
-                        onChange={ (e) => setName(e.target.value)} />
+                        onChange={ (e) => setName(e.target.value)} aria-label="İsim ve Soyisim" />
                 </div>
                 <div className="form-group">
                     <label htmlFor='text'>Yorum</label>
                     <textarea type='text' id='text' required placeholder='Yorum' maxLength={300}
                         value={text}
-                        onChange={ (e) => setText(e.target.value)} > 
+                        onChange={ (e) => setText(e.target.value)} aria-label="Yorum" > 
                     </textarea>
                 </div>
-                <button type='submit'>Kaydet</button>
+                <button type='submit' aria-label="Yorumu Kaydet">Kaydet</button>
             </form>
         </div>
     )

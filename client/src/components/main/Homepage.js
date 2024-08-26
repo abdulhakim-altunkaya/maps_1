@@ -43,23 +43,23 @@ function Homepage() {
   return (
     <div>
       {isLoading ? 
-        (<div>Lütfen Bekleyiniz..Please wait...</div>) 
+        (<div aria-live="polite">Lütfen Bekleyiniz..Please wait...</div>) 
         : 
         (
           <>
             <h1 style={{ fontFamily: "Kanit"}}>NÜFUS TABLOSU</h1>
             {Array.isArray(message) ? (
-              <table className="styled-table">
+              <table className="styled-table" aria-label="Türkiye vilayetleri nüfus tablosu">
                 <thead>
                   <tr>
-                    <th>Sıra</th>
-                    <th>Vilayet</th>
-                    <th>2023</th>
-                    <th>2022</th>
-                    <th>2021</th>
-                    <th>2015</th>
-                    <th>2011</th>
-                    <th>2007</th>
+                    <th scope="col">Sıra</th>
+                    <th scope="col">Vilayet</th>
+                    <th scope="col">2023</th>
+                    <th scope="col">2022</th>
+                    <th scope="col">2021</th>
+                    <th scope="col">2015</th>
+                    <th scope="col">2011</th>
+                    <th scope="col">2007</th>
                   </tr>
                 </thead>
                 <tbody>

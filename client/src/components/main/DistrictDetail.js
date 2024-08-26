@@ -38,18 +38,18 @@ function DistrictDetail() {
   return (
     <div>
       { loading ? 
-          <div>loading...</div>
+          <div aria-live="polite">Loading...</div> 
         :
           <>
             {message ? (
               <>
                 <div className='districtDetailsDiv'>
                   <h2 style={{ fontFamily: 'Ubuntu' }}>Yıllara Göre {message.districtname} Nüfusu</h2>
-                  <table className="provincetable">
+                  <table className="provincetable" aria-label="{message.districtname} ilçesi yıllara göre nüfus tablosu">
                     <thead>
                       <tr>
-                        <th>YIL</th>
-                        <th>NÜFUS</th>
+                        <th scope="col">YIL</th>
+                        <th scope="col">NÜFUS</th>
                       </tr>
                     </thead>
                     <tbody>

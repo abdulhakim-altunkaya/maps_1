@@ -11,7 +11,6 @@ function ProvinceDetailDown() {
   const [provinceTitle, setProvinceTitle] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-
   useEffect(() => {
     const getData = async () => {
       try {
@@ -41,24 +40,24 @@ function ProvinceDetailDown() {
   return (
         <div>
           {isLoading ? 
-              <div>loading....</div>
+              <div aria-live="polite">loading....</div>
             :
               <>
                 <div className='provinceMainTable'>
                   <h2 style={{ fontFamily: "Ubuntu" }}>{provinceTitle} Nüfus Tablosu</h2>
                   {Array.isArray(message) ? (
-                    <table className="provinceDistrictTable">
+                    <table className="provinceDistrictTable" aria-label="{provinceTitle} ili ve ilçelerinin nüfus tablosu">
                       <thead>
                         <tr>
-                          <th></th>
-                          <th>İL</th>
-                          <th>İLÇE</th>
-                          <th>2023</th>
-                          <th>2022</th>
-                          <th>2021</th>
-                          <th>2015</th>
-                          <th>2011</th>
-                          <th>2007</th>
+                          <th scope="col">Sıra</th>
+                          <th scope="col">İL</th>
+                          <th scope="col">İLÇE</th>
+                          <th scope="col">2023</th>
+                          <th scope="col">2022</th>
+                          <th scope="col">2021</th>
+                          <th scope="col">2015</th>
+                          <th scope="col">2011</th>
+                          <th scope="col">2007</th>
                         </tr>
                       </thead>
                       <tbody>

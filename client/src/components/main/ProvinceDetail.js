@@ -15,54 +15,51 @@ function ProvinceDetail() {
 
   const [message, setMessage] = useState([]);
   const [foreigners, setForeigners] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true); 
 
-  //We are using zustand store here to grab province population and save it there. Later
-  //We will use it in ProvinceOrigin component
   const setProvincePopulation = useStore((state) => state.setProvincePopulation);
 
   const { provinceId } = useParams();
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true); // Set loading to true before starting the fetch
+      setLoading(true);
       try {
         const response = await axios.get(`/serversendprovincedetails/${provinceId}`);
         const foreignersData = await axios.get(`/servergetforeigners/${provinceId}`);
         setMessage(response.data);
         setForeigners(foreignersData.data);
-        //save province population to zustand and later use it in ProvinceOrigin component
         setProvincePopulation(Number(response.data[2023]));
       } catch (error) {
         console.log(error.message);
         setMessage("error happened");
       } finally {
-        setLoading(false); // Set loading to false after the fetch is complete
+        setLoading(false);
       }
     }
     getData();
   }, [provinceId]);
 
   const formatNumber = (num) => {
-    return new Intl.NumberFormat('de-DE').format(num); // German locale to use dot as thousands separator
+    return new Intl.NumberFormat('de-DE').format(num);
   };
 
   return (
     <div>
       {loading ? (
-        <div>Loading...</div> // Display loading indicator
+        <div aria-live="polite">Loading...</div> 
       ) : (
         <>
           <ProvinceDetailDown />
           <p></p>
           <div className='provinceDetailDiv'>
             <h2 style={{ fontFamily: 'Ubuntu' }}>Yıllara Göre {message.provincename} Nüfusu</h2>
-            <table className="provincetable">
+            <table className="provincetable" aria-label="{message.provincename} nüfusu ve yabancı nüfus detayları">
               <thead>
                 <tr>
-                  <th>YIL</th>
-                  <th>NÜFUS</th>
-                  <th>Yabancı N.</th>
+                  <th scope="col">YIL</th>
+                  <th scope="col">NÜFUS</th>
+                  <th scope="col">Yabancı N.</th>
                 </tr>
               </thead>
               <tbody>

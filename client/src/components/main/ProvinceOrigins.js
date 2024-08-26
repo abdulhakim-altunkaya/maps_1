@@ -76,18 +76,18 @@ function ProvinceOrigins() {
   return (
     <div className='provinceOriginsDiv'>
       { isLoading ? 
-          <div>loading...</div>
+          <div aria-live="polite">loading...</div>
         :
           <>
             <h2 style={{ fontFamily: "Ubuntu" }}>{provinceTitle} En Çok Yaşadığı İller</h2>
             {Array.isArray(message) ? (
               <div>
-                <table className="provinceDistrictTable">
+                <table className="provinceDistrictTable" aria-label="{provinceTitle4} nüfusu ve diğer illerdeki dağılım">
                   <thead>
                     <tr>
-                      <th>SIRA</th>
-                      <th>İLLER</th>
-                      <th>{provinceTitle2}</th>
+                      <th scope="col">SIRA</th>
+                      <th scope="col">İLLER</th>
+                      <th scope="col">{provinceTitle2}</th>
                     </tr>
                   </thead>
                   <tbody>

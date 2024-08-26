@@ -21,11 +21,11 @@ function CommentReply({commentId2}) {
         if (name && text) {
             const date = new Date().toLocaleDateString('en-GB');
             const newComment = {
-                provinceId: Number(provinceId), // Ensure provinceId is a number
+                provinceId: Number(provinceId), 
                 name,
                 text,
                 date,
-                commentId: Number(commentId2) // Ensure commentId is a number
+                commentId: Number(commentId2)
             }
             try {
                 const response = await axios.post("/serversavecommentreply", newComment)
@@ -34,14 +34,14 @@ function CommentReply({commentId2}) {
                 if (error.response && error.response.status === 429) {
                     alert("Yeni cevap için biraz bekleyiniz.");
                 } else {
-                    alert("An error occurred while saving your comment. Please try again later.");
+                    alert("Yorumunuzu kaydederken hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
                 } 
             } finally {
                 setName("");
                 setText("");
             }
         } else {
-            alert("Please fill in comment fields");
+            alert("Bütün alanları doldurunuz");
         } 
     }
     return (
@@ -51,16 +51,16 @@ function CommentReply({commentId2}) {
                     <label htmlFor='name'>İsim ve Soyisim</label>
                     <input type='text' id='name' required placeholder='İsim ve Soyisim' maxLength={30} 
                         value={name}
-                        onChange={ (e) => setName(e.target.value)} />
+                        onChange={ (e) => setName(e.target.value)} aria-label="İsim ve Soyisim" />
                 </div>
                 <div className="form-group">
                     <label htmlFor='text'>Yorum</label>
                     <textarea type='text' id='text' required placeholder='Yorum' maxLength={300}
                         value={text}
-                        onChange={ (e) => setText(e.target.value)} > 
+                        onChange={ (e) => setText(e.target.value)} aria-label="Yorum" > 
                     </textarea>
                 </div>
-                <button type='submit'>Kaydet</button>
+                <button type='submit' aria-label="Yorumu Kaydet">Kaydet</button>
             </form>
         </div>
     )
