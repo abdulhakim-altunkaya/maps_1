@@ -300,8 +300,9 @@ app.get("/servergetinternational", async (req, res) => {
 //I can do that by checking each ip with database ip addresses but then it will be too many requests to db
 //We will save each visitor data to database. 
 const ipCache = {}
-// List of IPs to ignore (server centers etc
-const ignoredIPs = ["66.249.68.5", "66.249.68.4", "::1", "80.89.77.205"];
+// List of IPs to ignore (server centers, ad bots, my ip etc)
+const ignoredIPs = ["66.249.68.5", "66.249.68.4", "66.249.88.2", "66.249.88.3", "209.85.238.225", 
+  "209.85.238.224", "::1", "80.89.77.205"];
 
 app.post("/serversavevisitor", async (req, res) => {
   //Here we could basically say "const ipVisitor = req.ip" but my app is running on Render platform
