@@ -300,12 +300,19 @@ app.get("/servergetinternational", async (req, res) => {
 //I can do that by checking each ip with database ip addresses but then it will be too many requests to db
 //We will save each visitor data to database. 
 const ipCache = {}
+// List of IPs to ignore (server centers etc
+const ignoredIPs = ["66.249.68.5", "66.249.68.4", "::1", "80.89.77.205"];
+
 app.post("/serversavevisitor", async (req, res) => {
   //Here we could basically say "const ipVisitor = req.ip" but my app is running on Render platform
   //and Render is using proxies or load balancers. Because of that I will see "::1" as ip data if I not use
   //this line below
   const ipVisitor = req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(',')[0] : req.socket.remoteAddress || req.ip;
   let client;
+  // Check if the IP is in the ignored list
+  if (ignoredIPs.includes(ipVisitor)) {
+    return; // Simply exit the function, doing nothing for this IP
+  }
   // Check if IP exists in cache and if last visit was less than 1 hour ago
   if (ipCache[ipVisitor] && Date.now() - ipCache[ipVisitor] < 3600000) {
     return res.status(429).json({message: 'Too many requests from this IP. Please try again later.'});
