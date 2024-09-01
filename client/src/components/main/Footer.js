@@ -31,10 +31,13 @@ const Footer = () => {
         </p>
         <p>SVG Türkiye Haritası/Map: 
           <a href="https://simplemaps.com/svg/country/tr" target="_blank" rel="noopener noreferrer" 
-          aria-label="Data link to SimpleMaps website">SimpleMaps</a>
+          aria-label="Data link to SimpleMaps website">SimpleMaps</a> <br/>
+          <a href="https://icons8.com/icon/t2x6DtCn5Zzx/nginx" target="_blank" rel="noopener noreferrer" 
+          aria-label="Data link to SimpleMaps website" >Icon by Icons8</a>
         </p>
         <p>Website Manager: <a href='https://www.youtube.com/@soft.tomatoes'> Soft Tomatoes  </a> </p>
         <p>Contact: <a href="mailto:drysoftware1@gmail.com" aria-label="Email contact to DrySoftware">drysoftware1@gmail.com</a></p>
+
       </div>
     </footer>
   );
