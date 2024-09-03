@@ -48,10 +48,11 @@ function Homepage() {
         (
           <>
             <h1 style={{ fontFamily: "Kanit"}}>NÜFUS TABLOSU</h1>
+            <h4>Detay için il ve ilçeler üzerine tıklayınız</h4>
             {Array.isArray(message) ? (
               <table className="styled-table" aria-label="Türkiye vilayetleri nüfus tablosu">
                 <thead>
-                  <tr>
+                  <tr >
                     <th scope="col">Sıra</th>
                     <th scope="col">Vilayet</th>
                     <th scope="col">2023</th>
@@ -63,7 +64,7 @@ function Homepage() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr key="turkey-summary">
                       <td></td>
                       <td>Türkiye</td>
                       <td>85372377</td>
@@ -72,7 +73,7 @@ function Homepage() {
                       <td>78741053</td>
                       <td>74724269</td>
                       <td>70586256</td>
-                  </tr>
+                  </tr> 
                   {message.map((province, index) => (
                     <tr key={index}>
                       <td>{index + 1}</td>
