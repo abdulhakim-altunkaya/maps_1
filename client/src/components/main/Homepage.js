@@ -66,12 +66,12 @@ function Homepage() {
                   <tr>
                       <td></td>
                       <td><strong>Türkiye</strong></td>
-                      <td>formatNumber(85372377)</td>
-                      <td>formatNumber(85279553)</td>
-                      <td>formatNumber(84680273)</td>
-                      <td>formatNumber(78741053)</td>
-                      <td>formatNumber(74724269)</td>
-                      <td>formatNumber(70586256)</td>
+                      <td>{formatNumber(85372377)}</td>
+                      <td>{formatNumber(85279553)}</td>
+                      <td>{formatNumber(84680273)}</td>
+                      <td>{formatNumber(78741053)}</td>
+                      <td>{formatNumber(74724269)}</td>
+                      <td>{formatNumber(70586256)}</td>
                   </tr> 
                   {message.map((province, index) => (
                     <tr key={index}>
