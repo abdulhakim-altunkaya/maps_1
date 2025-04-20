@@ -63,6 +63,7 @@ function ProvinceDetail() {
                 </tr>
               </thead>
               <tbody>
+                <tr><td>2024</td><td>{formatNumber(message[2024])}</td><td>{formatNumber(foreigners[2024])}</td></tr>
                 <tr><td>2023</td><td>{formatNumber(message[2023])}</td><td>{formatNumber(foreigners[2023])}</td></tr>
                 <tr><td>2022</td><td>{formatNumber(message[2022])}</td><td>{formatNumber(foreigners[2022])}</td></tr>
                 <tr><td>2021</td><td>{formatNumber(message[2021])}</td><td>{formatNumber(foreigners[2021])}</td></tr>

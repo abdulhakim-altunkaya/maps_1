@@ -52,9 +52,9 @@ function ProvinceDetailDown() {
                           <th scope="col">Sıra</th>
                           <th scope="col">İL</th>
                           <th scope="col">İLÇE</th>
+                          <th scope="col">2024</th>
                           <th scope="col">2023</th>
                           <th scope="col">2022</th>
-                          <th scope="col">2021</th>
                           <th scope="col">2015</th>
                           <th scope="col">2011</th>
                           <th scope="col">2007</th>
@@ -68,9 +68,9 @@ function ProvinceDetailDown() {
                             <td onClick={() => getDistrictDetails(district.id)} style={{cursor: "pointer"}}>
                               {district.districtname}
                             </td>
+                            <td>{formatNumber(district['2024'])}</td>
                             <td>{formatNumber(district['2023'])}</td>
                             <td>{formatNumber(district['2022'])}</td>
-                            <td>{formatNumber(district['2021'])}</td>
                             <td>{formatNumber(district['2015'])}</td>
                             <td>{formatNumber(district['2011'])}</td>
                             <td>{formatNumber(district['2007'])}</td>

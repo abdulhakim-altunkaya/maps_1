@@ -24,9 +24,9 @@ app.get("/servergetprovinces", async (req, res) => {
   try {
     client = await pool.connect();
     const result = await client.query(
-      `SELECT "provincename", "2007", "2011", "2015", "2021", "2022", "2023", "provinceid"
+      `SELECT "provincename", "2007", "2011", "2015", "2022", "2023", "2024", "provinceid"
        FROM provinces
-       ORDER BY "2023" DESC`
+       ORDER BY "2024" DESC`
     );
     const dbprovinces = result.rows;
     res.status(200).json(dbprovinces);
