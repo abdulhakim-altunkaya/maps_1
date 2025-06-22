@@ -128,25 +128,6 @@ app.post("/serversavecomment", async (req, res) => {
   let client;
   const newComment = req.body;
   const {provinceId, name, text, date} = newComment;
-  
-  /*
-  // Input checks to prevent user mistakes
-  if (!provinceId || !name || !text || !date) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
-  if (typeof provinceId !== 'number') {
-    return res.status(400).json({ message: "provinceId must be a number" });
-  }
-  if (typeof name !== 'string' || name.trim().length === 0) {
-    return res.status(400).json({ message: "Name must be a non-empty string" });
-  }
-  if (typeof text !== 'string' || text.trim().length === 0) {
-    return res.status(400).json({ message: "Text must be a non-empty string" });
-  }
-  if (isNaN(Date.parse(date))) {
-    return res.status(400).json({ message: "Date must be a valid date" });
-  }
-    */
 
   try {
     client = await pool.connect();
@@ -301,8 +282,7 @@ app.get("/servergetinternational", async (req, res) => {
 //We will save each visitor data to database. 
 const ipCache = {}
 // List of IPs to ignore (server centers, ad bots, my ip etc)
-const ignoredIPs = ["66.249.68.5", "66.249.68.4", "66.249.88.2", "66.249.88.3", "209.85.238.225", 
-  "209.85.238.224", "::1", "80.89.77.205", "212.3.197.186"];
+const ignoredIPs = ["66.249.68888888.5", "66.249.688888.4"];
 
 app.post("/serversavevisitor", async (req, res) => {
   //Here we could basically say "const ipVisitor = req.ip" but my app is running on Render platform
